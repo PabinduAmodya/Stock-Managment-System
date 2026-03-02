@@ -1,0 +1,3 @@
+spring:
+  application:
+    name: Stock_Managment 

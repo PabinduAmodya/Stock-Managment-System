@@ -9,7 +9,7 @@ export const api = axios.create({
   }
 });
 
-
+// ─── Request interceptor: attach JWT token to every request ──────────────────
 api.interceptors.request.use((config) => {
   const raw = localStorage.getItem('sm.auth.user');
   if (raw) {
@@ -19,12 +19,16 @@ api.interceptors.request.use((config) => {
         config.headers['Authorization'] = `Bearer ${authUser.token}`;
       }
     } catch {
+      // ignore malformed storage
     }
   }
   return config;
 });
 
-
+// ─── Response interceptor ────────────────────────────────────────────────────
+// ONLY redirect to login on 401 (expired / missing token).
+// 403 means the token is valid but the role lacks permission — do NOT logout,
+// just let the component handle the error message.
 api.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -32,7 +36,6 @@ api.interceptors.response.use(
       localStorage.removeItem('sm.auth.user');
       window.location.href = '/login';
     }
-
     return Promise.reject(error);
   }
 );

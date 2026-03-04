@@ -16,6 +16,15 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 
+/**
+ * Responsibilities:
+ * - Creating purchases with automatic total calculation
+ * - Managing purchase status workflow (PENDING → APPROVED / REJECTED)
+ * - Updating product stock quantities upon approval
+ * - Logging stock movements for GRN transactions
+ * - Validating business rules before update/delete operations
+ */
+
 @Service
 public class PurchaseService {
 

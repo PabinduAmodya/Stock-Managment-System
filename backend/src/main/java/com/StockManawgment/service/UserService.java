@@ -19,7 +19,6 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    // ── Create ────────────────────────────────────────────────────────────────
 
     public User createUser(User user) {
         if (userRepository.existsByEmail(user.getEmail())) {
@@ -30,7 +29,6 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    // ── Read ──────────────────────────────────────────────────────────────────
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -46,8 +44,6 @@ public class UserService {
                 .orElseThrow(() -> new ResourceNotFoundException("User not found: " + email));
     }
 
-    // ── Admin: update name/email only — role is NOT changed here ─────────────
-    // Role changes must go through changeRole() using the dedicated PATCH endpoint
 
     public User updateUser(Long id, User userDetails) {
         User user = getUserById(id);
@@ -63,7 +59,6 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    // ── Delete — guard: admin cannot delete their own account ────────────────
 
     public void deleteUser(Long id, String callerEmail) {
         User user = getUserById(id);
@@ -73,7 +68,6 @@ public class UserService {
         userRepository.delete(user);
     }
 
-    // ── Status ────────────────────────────────────────────────────────────────
 
     public User activateUser(Long id) {
         User user = getUserById(id);
@@ -87,7 +81,6 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    // ── Role ──────────────────────────────────────────────────────────────────
 
     public User changeRole(Long id, User.Role newRole) {
         User user = getUserById(id);
@@ -95,7 +88,6 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    // ── Admin password reset (no current password check) ─────────────────────
 
     public User resetPassword(Long id, String newPassword) {
         if (newPassword == null || newPassword.trim().length() < 6) {
@@ -106,7 +98,6 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    // ── Self-service profile update ───────────────────────────────────────────
 
     public User updateProfile(String callerEmail, ProfileUpdateRequest request) {
         User user = getByEmail(callerEmail);
@@ -124,7 +115,6 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    // ── Self-service password change (current password verification required) ─
 
     public void changeOwnPassword(String callerEmail, String currentPassword, String newPassword) {
         if (currentPassword == null || currentPassword.isEmpty()) {

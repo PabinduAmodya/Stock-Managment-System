@@ -41,3 +41,12 @@ export const UsersAPI = {
   resetPassword: async (id: number, payload: PasswordResetRequest) =>
     (await api.patch<string>(`/api/users/${id}/reset-password`, payload)).data
 };
+
+export const CustomersAPI = {
+  list: async () => (await api.get<Customer[]>('/api/customers')).data,
+  create: async (payload: Partial<Customer>) =>
+    (await api.post<Customer>('/api/customers', payload)).data,
+  update: async (id: number, payload: Partial<Customer>) =>
+    (await api.put<Customer>(`/api/customers/${id}`, payload)).data,
+  remove: async (id: number) => (await api.delete<string>(`/api/customers/${id}`)).data
+};

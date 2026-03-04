@@ -2,6 +2,7 @@ package com.StockManawgment.Stock_Managment.service;
 
 import com.StockManawgment.Stock_Managment.entity.Product;
 import com.StockManawgment.Stock_Managment.entity.SaleItem;
+import com.StockManawgment.Stock_Managment.entity.Sale;
 import com.StockManawgment.Stock_Managment.entity.Stock;
 import com.StockManawgment.Stock_Managment.exception.BadRequestException;
 import com.StockManawgment.Stock_Managment.exception.ResourceNotFoundException;

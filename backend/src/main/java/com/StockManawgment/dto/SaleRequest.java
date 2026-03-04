@@ -1,6 +1,7 @@
 package com.StockManawgment.Stock_Managment.dto;
 
 import com.StockManawgment.Stock_Managment.entity.SaleItem;
+import com.StockManawgment.Stock_Managment.entity.Sale;
 import java.util.List;
 
 public class SaleRequest {

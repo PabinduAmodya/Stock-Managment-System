@@ -1,6 +1,8 @@
 package com.StockManawgment.Stock_Managment.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.StockManawgment.Stock_Managment.entity.Purchase;
+import com.StockManawgment.Stock_Managment.entity.Product;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 

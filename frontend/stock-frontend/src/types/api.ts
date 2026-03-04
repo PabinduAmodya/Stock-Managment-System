@@ -45,7 +45,7 @@ export interface User {
   createdAt?: string;
 }
 
-// ─── JWT Login ───────────────────────────────────────────────────────────────
+// ─── JWT Login ────────────────────────────────────────────────────────────────
 
 export interface LoginRequest {
   email: string;
@@ -70,7 +70,19 @@ export interface AuthUser {
   status: 'ACTIVE' | 'INACTIVE';
 }
 
-// ─── Rest of types ────────────────────────────────────────────────────────────
+// ─── Profile self-service ─────────────────────────────────────────────────────
+
+export interface ProfileUpdateRequest {
+  name: string;
+  email: string;
+}
+
+export interface PasswordChangeRequest {
+  currentPassword: string;
+  newPassword: string;
+}
+
+// ─── Purchases ────────────────────────────────────────────────────────────────
 
 export interface Purchase {
   id: ID;
@@ -89,6 +101,8 @@ export interface PurchaseItem {
   unitPrice: number;
   totalPrice: number;
 }
+
+// ─── Sales ────────────────────────────────────────────────────────────────────
 
 export interface Sale {
   id: ID;
@@ -109,6 +123,8 @@ export interface SaleItem {
   totalPrice: number;
 }
 
+// ─── Stock ────────────────────────────────────────────────────────────────────
+
 export interface Stock {
   id: ID;
   product: Product;
@@ -117,6 +133,8 @@ export interface Stock {
   type: 'PURCHASE' | 'ADJUSTMENT';
   note?: string | null;
 }
+
+// ─── Request payloads ─────────────────────────────────────────────────────────
 
 export interface PurchaseRequest {
   purchase: Partial<Purchase>;

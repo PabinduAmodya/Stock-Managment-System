@@ -3,6 +3,7 @@ package com.StockManawgment.Stock_Managment.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
+import com.StockManawgment.Stock_Managment.entity.Product;
 
 @Entity
 @Table(name = "sale_items")

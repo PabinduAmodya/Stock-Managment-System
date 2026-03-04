@@ -41,3 +41,15 @@ export const UsersAPI = {
   resetPassword: async (id: number, payload: PasswordResetRequest) =>
     (await api.patch<string>(`/api/users/${id}/reset-password`, payload)).data
 };
+
+export const SalesAPI = {
+  list: async () => (await api.get<Sale[]>('/api/sales')).data,
+  get: async (id: number) => (await api.get<Sale>(`/api/sales/${id}`)).data,
+  create: async (payload: SaleRequest) =>
+      (await api.post<Sale>('/api/sales/create', payload)).data,
+  update: async (id: number, payload: Partial<Sale>) =>
+      (await api.put<Sale>(`/api/sales/${id}`, payload)).data,
+  remove: async (id: number) => (await api.delete<string>(`/api/sales/${id}`)).data,
+  items: async (id: number) => (await api.get<SaleItem[]>(`/api/sales/${id}/items`)).data,
+  invoice: async (id: number) => (await api.get<Sale>(`/api/sales/${id}/invoice`)).data
+};

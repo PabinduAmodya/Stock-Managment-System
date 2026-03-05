@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import {
-  Alert,
   Box,
   Button,
   Card,
@@ -27,6 +26,7 @@ import type { Category, Product, Supplier } from '../types/api';
 import { PageHeader } from '../components/PageHeader';
 import { ConfirmDialog } from '../components/ConfirmDialog';
 import { Toast, ToastState } from '../components/Toast';
+import { useAuth } from '../auth/AuthContext';
 import { fmtLKR, toNumber } from '../utils/money';
 
 const emptyForm = {
@@ -35,7 +35,6 @@ const emptyForm = {
   barcode: '',
   price: 0,
   costPrice: 0,
-  quantity: 0,
   reorderLevel: 10,
   categoryId: '',
   supplierId: ''
@@ -44,6 +43,9 @@ const emptyForm = {
 type FormState = typeof emptyForm;
 
 export function ProductsPage() {
+  const { user } = useAuth();
+  const isAdminOrManager = user?.role === 'ADMIN' || user?.role === 'MANAGER';
+
   const [rows, setRows] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [suppliers, setSuppliers] = useState<Supplier[]>([]);
@@ -55,10 +57,21 @@ export function ProductsPage() {
   const isEdit = useMemo(() => form.id !== 0, [form.id]);
 
   const load = async () => {
-    const [p, c, s] = await Promise.all([ProductsAPI.list(), CategoriesAPI.list(), SuppliersAPI.list()]);
-    setRows(p);
-    setCategories(c);
-    setSuppliers(s);
+    try {
+      if (isAdminOrManager) {
+        const [p, c, s] = await Promise.all([
+          ProductsAPI.list(),
+          CategoriesAPI.list(),
+          SuppliersAPI.list()
+        ]);
+        setRows(p); setCategories(c); setSuppliers(s);
+      } else {
+        const [p, c] = await Promise.all([ProductsAPI.list(), CategoriesAPI.list()]);
+        setRows(p); setCategories(c);
+      }
+    } catch (e: any) {
+      setToast({ open: true, message: e?.response?.data?.message ?? 'Failed to load data', severity: 'error' });
+    }
   };
 
   useEffect(() => { load(); }, []);
@@ -72,7 +85,6 @@ export function ProductsPage() {
       barcode: p.barcode ?? '',
       price: toNumber(p.price),
       costPrice: toNumber(p.costPrice),
-      quantity: p.quantity ?? 0,
       reorderLevel: p.reorderLevel ?? 10,
       categoryId: p.category?.id ? String(p.category.id) : '',
       supplierId: p.supplier?.id ? String(p.supplier.id) : ''
@@ -89,31 +101,22 @@ export function ProductsPage() {
       setToast({ open: true, message: 'Price/Cost cannot be negative', severity: 'warning' });
       return;
     }
-
     const payload: any = {
       name: form.name.trim(),
       barcode: form.barcode.trim() || null,
       price: form.price,
       costPrice: form.costPrice,
-      quantity: form.quantity,
       reorderLevel: form.reorderLevel,
       category: form.categoryId ? { id: Number(form.categoryId) } : null,
       supplier: form.supplierId ? { id: Number(form.supplierId) } : null
     };
-
     try {
       if (isEdit) {
         await ProductsAPI.update(form.id, payload);
         setToast({ open: true, message: 'Product updated', severity: 'success' });
       } else {
         await ProductsAPI.create(payload);
-        setToast({
-          open: true,
-          message: form.quantity > 0
-            ? `Product created with opening stock of ${form.quantity} units`
-            : 'Product created',
-          severity: 'success'
-        });
+        setToast({ open: true, message: 'Product created', severity: 'success' });
       }
       setOpen(false);
       await load();
@@ -164,9 +167,7 @@ export function ProductsPage() {
               {rows.map((p) => (
                 <TableRow key={p.id} hover>
                   <TableCell>{p.id}</TableCell>
-                  <TableCell>
-                    <Typography sx={{ fontWeight: 700 }}>{p.name}</Typography>
-                  </TableCell>
+                  <TableCell><Typography sx={{ fontWeight: 700 }}>{p.name}</Typography></TableCell>
                   <TableCell>{p.barcode ?? '-'}</TableCell>
                   <TableCell>{p.category?.categoryName ?? '-'}</TableCell>
                   <TableCell>{p.supplier?.supplierName ?? '-'}</TableCell>
@@ -183,7 +184,9 @@ export function ProductsPage() {
                   <TableCell align="right">{p.reorderLevel}</TableCell>
                   <TableCell align="right">
                     <Button size="small" onClick={() => openEdit(p)}>Edit</Button>
-                    <Button size="small" color="error" onClick={() => setDeleting(p)}>Delete</Button>
+                    {isAdminOrManager && (
+                      <Button size="small" color="error" onClick={() => setDeleting(p)}>Delete</Button>
+                    )}
                   </TableCell>
                 </TableRow>
               ))}
@@ -219,30 +222,13 @@ export function ProductsPage() {
               onChange={(e) => setForm((f) => ({ ...f, costPrice: toNumber(e.target.value) }))}
             />
           </Box>
-          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: 2 }}>
-            <TextField
-              label={isEdit ? 'Stock Quantity' : 'Opening Stock Qty'}
-              type="number"
-              value={form.quantity}
-              onChange={(e) => setForm((f) => ({ ...f, quantity: Math.max(0, Math.trunc(toNumber(e.target.value))) }))}
-              helperText={isEdit ? 'Current stock on hand' : 'Initial stock on hand'}
-            />
-            <TextField
-              label="Reorder Level"
-              type="number"
-              value={form.reorderLevel}
-              onChange={(e) => setForm((f) => ({ ...f, reorderLevel: Math.max(0, Math.trunc(toNumber(e.target.value))) }))}
-              helperText="Alert threshold"
-            />
-          </Box>
-
-          {/* Only show opening stock notice on create */}
-          {!isEdit && form.quantity > 0 && (
-            <Alert severity="info" sx={{ py: 0.5 }}>
-              An opening stock entry of <strong>{form.quantity} units</strong> will be recorded in stock history.
-            </Alert>
-          )}
-
+          <TextField
+            label="Reorder Level"
+            type="number"
+            value={form.reorderLevel}
+            onChange={(e) => setForm((f) => ({ ...f, reorderLevel: Math.max(0, Math.trunc(toNumber(e.target.value))) }))}
+            helperText="Alert threshold for low stock"
+          />
           <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: 2 }}>
             <FormControl fullWidth>
               <InputLabel>Category</InputLabel>
@@ -257,19 +243,21 @@ export function ProductsPage() {
                 ))}
               </Select>
             </FormControl>
-            <FormControl fullWidth>
-              <InputLabel>Supplier</InputLabel>
-              <Select
-                label="Supplier"
-                value={form.supplierId}
-                onChange={(e) => setForm((f) => ({ ...f, supplierId: String(e.target.value) }))}
-              >
-                <MenuItem value="">None</MenuItem>
-                {suppliers.map((s) => (
-                  <MenuItem key={s.id} value={String(s.id)}>{s.supplierName}</MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+            {isAdminOrManager && (
+              <FormControl fullWidth>
+                <InputLabel>Supplier</InputLabel>
+                <Select
+                  label="Supplier"
+                  value={form.supplierId}
+                  onChange={(e) => setForm((f) => ({ ...f, supplierId: String(e.target.value) }))}
+                >
+                  <MenuItem value="">None</MenuItem>
+                  {suppliers.map((s) => (
+                    <MenuItem key={s.id} value={String(s.id)}>{s.supplierName}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            )}
           </Box>
         </DialogContent>
         <DialogActions>

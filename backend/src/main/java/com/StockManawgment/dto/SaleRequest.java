@@ -1,4 +1,4 @@
-package com.StockManawgment.Stock_Managment.dto;
+package com.StockManawgment.dto;
 
 import com.StockManawgment.Stock_Managment.entity.SaleItem;
 import com.StockManawgment.Stock_Managment.entity.Sale;

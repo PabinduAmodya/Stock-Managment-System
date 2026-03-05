@@ -1,6 +1,6 @@
-package com.StockManawgment.Stock_Managment.repository;
+package com.StockManawgment.repository;
 
-import com.StockManawgment.Stock_Managment.entity.Product;
+import com.StockManawgment.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

@@ -1,29 +1,20 @@
-package com.StockManawgment.Stock_Managment.service;
+package com.StockManawgment.service;
 
-import com.StockManawgment.Stock_Managment.entity.Product;
-import com.StockManawgment.Stock_Managment.entity.Purchase;
-import com.StockManawgment.Stock_Managment.entity.PurchaseItem;
-import com.StockManawgment.Stock_Managment.entity.Stock;
-import com.StockManawgment.Stock_Managment.exception.BadRequestException;
-import com.StockManawgment.Stock_Managment.exception.ResourceNotFoundException;
-import com.StockManawgment.Stock_Managment.repository.ProductRepository;
-import com.StockManawgment.Stock_Managment.repository.PurchaseItemRepository;
-import com.StockManawgment.Stock_Managment.repository.PurchaseRepository;
-import com.StockManawgment.Stock_Managment.repository.StockRepository;
+import com.StockManawgment.entity.Product;
+import com.StockManawgment.entity.Purchase;
+import com.StockManawgment.entity.PurchaseItem;
+import com.StockManawgment.entity.Stock;
+import com.StockManawgment.exception.BadRequestException;
+import com.StockManawgment.exception.ResourceNotFoundException;
+import com.StockManawgment.repository.ProductRepository;
+import com.StockManawgment.repository.PurchaseItemRepository;
+import com.StockManawgment.repository.PurchaseRepository;
+import com.StockManawgment.repository.StockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
-
-/**
- * Responsibilities:
- * - Creating purchases with automatic total calculation
- * - Managing purchase status workflow (PENDING → APPROVED / REJECTED)
- * - Updating product stock quantities upon approval
- * - Logging stock movements for GRN transactions
- * - Validating business rules before update/delete operations
- */
 
 @Service
 public class PurchaseService {

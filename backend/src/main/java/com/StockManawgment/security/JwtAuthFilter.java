@@ -1,4 +1,4 @@
-package com.StockManawgment.Stock_Managment.security;
+package com.StockManawgment.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -18,7 +18,7 @@ import java.util.List;
 public class JwtAuthFilter extends OncePerRequestFilter {
 
     @Autowired
-    private com.StockManawgment.Stock_Managment.security.JwtUtils jwtUtils;
+    private com.StockManawgment.security.JwtUtils jwtUtils;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,

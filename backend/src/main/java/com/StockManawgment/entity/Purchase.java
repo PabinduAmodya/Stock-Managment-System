@@ -1,4 +1,4 @@
-package com.StockManawgment.Stock_Managment.entity;
+package com.StockManawgment.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;

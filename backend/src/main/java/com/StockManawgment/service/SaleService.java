@@ -1,15 +1,15 @@
-package com.StockManawgment.Stock_Managment.service;
+package com.StockManawgment.service;
 
-import com.StockManawgment.Stock_Managment.entity.Product;
-import com.StockManawgment.Stock_Managment.entity.SaleItem;
-import com.StockManawgment.Stock_Managment.entity.Sale;
-import com.StockManawgment.Stock_Managment.entity.Stock;
-import com.StockManawgment.Stock_Managment.exception.BadRequestException;
-import com.StockManawgment.Stock_Managment.exception.ResourceNotFoundException;
-import com.StockManawgment.Stock_Managment.repository.ProductRepository;
-import com.StockManawgment.Stock_Managment.repository.SaleItemRepository;
-import com.StockManawgment.Stock_Managment.repository.SaleRepository;
-import com.StockManawgment.Stock_Managment.repository.StockRepository;
+import com.StockManawgment.entity.Product;
+import com.StockManawgment.entity.SaleItem;
+import com.StockManawgment.entity.Sale;
+import com.StockManawgment.entity.Stock;
+import com.StockManawgment.exception.BadRequestException;
+import com.StockManawgment.exception.ResourceNotFoundException;
+import com.StockManawgment.repository.ProductRepository;
+import com.StockManawgment.repository.SaleItemRepository;
+import com.StockManawgment.repository.SaleRepository;
+import com.StockManawgment.repository.StockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

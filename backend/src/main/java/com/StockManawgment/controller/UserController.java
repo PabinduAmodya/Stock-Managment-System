@@ -1,11 +1,11 @@
-package com.StockManawgment.Stock_Managment.controller;
+package com.StockManawgment.controller;
 
-import com.StockManawgment.Stock_Managment.dto.PasswordChangeRequest;
-import com.StockManawgment.Stock_Managment.dto.PasswordResetRequest;
-import com.StockManawgment.Stock_Managment.dto.ProfileUpdateRequest;
-import com.StockManawgment.Stock_Managment.dto.RoleChangeRequest;
-import com.StockManawgment.Stock_Managment.entity.User;
-import com.StockManawgment.Stock_Managment.service.UserService;
+import com.StockManawgment.dto.PasswordChangeRequest;
+import com.StockManawgment.dto.PasswordResetRequest;
+import com.StockManawgment.dto.ProfileUpdateRequest;
+import com.StockManawgment.dto.RoleChangeRequest;
+import com.StockManawgment.entity.User;
+import com.StockManawgment.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -55,7 +55,7 @@ public class UserController {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
-\    @GetMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
         return ResponseEntity.ok(userService.getUserById(id));
     }

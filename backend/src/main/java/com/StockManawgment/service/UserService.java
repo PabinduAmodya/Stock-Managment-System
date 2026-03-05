@@ -1,10 +1,10 @@
-package com.StockManawgment.Stock_Managment.service;
+package com.StockManawgment.service;
 
-import com.StockManawgment.Stock_Managment.dto.ProfileUpdateRequest;
-import com.StockManawgment.Stock_Managment.entity.User;
-import com.StockManawgment.Stock_Managment.exception.BadRequestException;
-import com.StockManawgment.Stock_Managment.exception.ResourceNotFoundException;
-import com.StockManawgment.Stock_Managment.repository.UserRepository;
+import com.StockManawgment.dto.ProfileUpdateRequest;
+import com.StockManawgment.entity.User;
+import com.StockManawgment.exception.BadRequestException;
+import com.StockManawgment.exception.ResourceNotFoundException;
+import com.StockManawgment.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

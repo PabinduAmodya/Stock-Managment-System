@@ -1,4 +1,4 @@
-package com.StockManawgment.Stock_Managment.exception;
+package com.StockManawgment.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

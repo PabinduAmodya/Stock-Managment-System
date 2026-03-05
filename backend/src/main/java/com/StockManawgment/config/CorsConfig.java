@@ -1,4 +1,5 @@
-package com.StockManawgment.Stock_Managment.config;
+package com.StockManawgment.config;
+
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

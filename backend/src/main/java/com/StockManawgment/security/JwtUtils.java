@@ -1,4 +1,4 @@
-package com.StockManawgment.Stock_Managment.security;
+package com.StockManawgment.security;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;

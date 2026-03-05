@@ -1,4 +1,4 @@
-package com.StockManawgment.Stock_Managment.dto;
+package com.StockManawgment.dto;
 
 public class LoginResponse {
     private String token;

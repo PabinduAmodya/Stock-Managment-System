@@ -1,8 +1,9 @@
-package com.StockManawgment.Stock_Managment.controller;
+package com.StockManawgment.controller;
 
-import com.StockManawgment.Stock_Managment.dto.SaleRequest;
-import com.StockManawgment.Stock_Managment.entity.SaleItem;
-import com.StockManawgment.Stock_Managment.service.SaleService;
+import com.StockManawgment.dto.SaleRequest;
+import com.StockManawgment.entity.Sale;
+import com.StockManawgment.entity.SaleItem;
+import com.StockManawgment.service.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

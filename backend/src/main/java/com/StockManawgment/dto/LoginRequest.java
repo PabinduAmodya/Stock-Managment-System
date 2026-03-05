@@ -1,4 +1,4 @@
-package com.StockManawgment.Stock_Managment.dto;
+package com.StockManawgment.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

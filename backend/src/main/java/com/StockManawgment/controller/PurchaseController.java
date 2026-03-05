@@ -1,9 +1,9 @@
-package com.StockManawgment.Stock_Managment.controller;
+package com.StockManawgment.controller;
 
-import com.StockManawgment.Stock_Managment.dto.PurchaseRequest;
-import com.StockManawgment.Stock_Managment.entity.Purchase;
-import com.StockManawgment.Stock_Managment.entity.PurchaseItem;
-import com.StockManawgment.Stock_Managment.service.PurchaseService;
+import com.StockManawgment.dto.PurchaseRequest;
+import com.StockManawgment.entity.Purchase;
+import com.StockManawgment.entity.PurchaseItem;
+import com.StockManawgment.service.PurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

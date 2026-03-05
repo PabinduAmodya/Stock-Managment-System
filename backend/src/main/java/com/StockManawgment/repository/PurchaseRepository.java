@@ -1,6 +1,6 @@
-package com.StockManawgment.Stock_Managment.repository;
+package com.StockManawgment.repository;
 
-import com.StockManawgment.Stock_Managment.entity.Purchase;
+import com.StockManawgment.entity.Purchase;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.time.LocalDateTime;

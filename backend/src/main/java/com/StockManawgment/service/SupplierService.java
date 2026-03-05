@@ -1,8 +1,8 @@
-package com.StockManawgment.Stock_Managment.service;
+package com.StockManawgment.service;
 
-import com.StockManawgment.Stock_Managment.entity.Supplier;
-import com.StockManawgment.Stock_Managment.exception.ResourceNotFoundException;
-import com.StockManawgment.Stock_Managment.repository.SupplierRepository;
+import com.StockManawgment.entity.Supplier;
+import com.StockManawgment.exception.ResourceNotFoundException;
+import com.StockManawgment.repository.SupplierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;

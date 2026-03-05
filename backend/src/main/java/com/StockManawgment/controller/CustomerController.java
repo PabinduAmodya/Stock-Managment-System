@@ -1,7 +1,7 @@
-package com.StockManawgment.Stock_Managment.controller;
+package com.StockManawgment.controller;
 
-import com.StockManawgment.Stock_Managment.entity.Customer;
-import com.StockManawgment.Stock_Managment.service.CustomerService;
+import com.StockManawgment.entity.Customer;
+import com.StockManawgment.service.CustomerService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,10 +1,10 @@
-package com.StockManawgment.Stock_Managment.repository;
+package com.StockManawgment.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import com.StockManawgment.Stock_Managment.entity.Sale;
+import com.StockManawgment.entity.Sale;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

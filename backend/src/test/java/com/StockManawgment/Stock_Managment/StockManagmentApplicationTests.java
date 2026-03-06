@@ -1,4 +1,4 @@
-package com.StockManawgment.Stock_Managment;
+package com.StockManawgment;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

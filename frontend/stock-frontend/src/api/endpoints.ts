@@ -168,7 +168,6 @@ export const ReportsAPI = {
     (await api.get('/api/reports/purchases', { params: { start: startISO, end: endISO } })).data,
   profit: async (startISO: string, endISO: string) =>
     (await api.get('/api/reports/profit', { params: { start: startISO, end: endISO } })).data,
-<<<<<<< Updated upstream
   lowStock: async () =>
     (await api.get<Product[]>('/api/reports/low-stock')).data,
   suppliers: async () =>
@@ -178,22 +177,4 @@ export const ReportsAPI = {
       params: { date: dateISO },
       responseType: 'blob'
     })).data
-};
-
-export const SalesAPI = {
-  list: async () => (await api.get<Sale[]>('/api/sales')).data,
-  get: async (id: number) => (await api.get<Sale>(`/api/sales/${id}`)).data,
-  create: async (payload: SaleRequest) =>
-      (await api.post<Sale>('/api/sales/create', payload)).data,
-  update: async (id: number, payload: Partial<Sale>) =>
-      (await api.put<Sale>(`/api/sales/${id}`, payload)).data,
-  remove: async (id: number) => (await api.delete<string>(`/api/sales/${id}`)).data,
-  items: async (id: number) => (await api.get<SaleItem[]>(`/api/sales/${id}/items`)).data,
-  invoice: async (id: number) => (await api.get<Sale>(`/api/sales/${id}/invoice`)).data
-};
-=======
-  lowStock: async () => (await api.get<Product[]>('/api/reports/low-stock')).data,
-  suppliers: async () => (await api.get<Supplier[]>('/api/reports/suppliers')).data,
-  dailySalesCsv: async (dateISO: string) =>
-    (await api.get('/api/reports/daily-sales/csv', { params: { date: dateISO }, responseType: 'blob' })).data
 };

@@ -98,7 +98,7 @@ export function CategoriesPage() {
     if (!search.trim()) return rows;
     const q = search.toLowerCase();
     return rows.filter(
-      (c) =>
+      (c: Category) =>
         c.categoryName.toLowerCase().includes(q) ||
         (c.description ?? '').toLowerCase().includes(q)
     );
@@ -152,14 +152,14 @@ export function CategoriesPage() {
   const openMapping = (c: Category) => {
     setMappingCategory(c);
     // Pre-select products currently in this category
-    const currentIds = (productMap[c.id] ?? []).map((p) => p.id);
+    const currentIds = (productMap[c.id] ?? []).map((p: Product) => p.id);
     setMappingSelected(new Set(currentIds));
     setMappingSearch('');
     setMappingOpen(true);
   };
 
   const toggleProduct = (productId: number) => {
-    setMappingSelected((prev) => {
+    setMappingSelected((prev: Set<number>) => {
       const next = new Set(prev);
       if (next.has(productId)) next.delete(productId);
       else next.add(productId);
@@ -172,7 +172,7 @@ export function CategoriesPage() {
     setMappingSaving(true);
     try {
       const catId = mappingCategory.id;
-      const currentlyMapped = new Set((productMap[catId] ?? []).map((p) => p.id));
+      const currentlyMapped = new Set((productMap[catId] ?? []).map((p: Product) => p.id));
 
       // Products to add to this category
       const toAdd = [...mappingSelected].filter((pid) => !currentlyMapped.has(pid));
@@ -182,8 +182,8 @@ export function CategoriesPage() {
       const promises: Promise<any>[] = [];
 
       // Assign category to newly selected products
-      toAdd.forEach((pid) => {
-        const prod = allProducts.find((p) => p.id === pid);
+      toAdd.forEach((pid: number) => {
+        const prod = allProducts.find((p: Product) => p.id === pid);
         if (prod) {
           promises.push(
             ProductsAPI.update(pid, { category: { id: catId } as any })
@@ -192,7 +192,7 @@ export function CategoriesPage() {
       });
 
       // Remove category from deselected products (set category to null)
-      toRemove.forEach((pid) => {
+      toRemove.forEach((pid: number) => {
         promises.push(
           ProductsAPI.update(pid, { category: null } as any)
         );
@@ -218,7 +218,7 @@ export function CategoriesPage() {
     if (!mappingSearch.trim()) return allProducts;
     const q = mappingSearch.toLowerCase();
     return allProducts.filter(
-      (p) =>
+      (p: Product) =>
         p.name.toLowerCase().includes(q) ||
         (p.barcode ?? '').toLowerCase().includes(q)
     );
@@ -226,7 +226,7 @@ export function CategoriesPage() {
 
   /* ──────────────── Row expand toggle ────────────────────────── */
   const toggleExpand = (catId: number) =>
-    setExpandedId((prev) => (prev === catId ? null : catId));
+    setExpandedId((prev: number | null) => (prev === catId ? null : catId));
 
   /* ──────────────────────── render ────────────────────────────── */
   return (
@@ -244,7 +244,7 @@ export function CategoriesPage() {
           size="small"
           placeholder="Search categories…"
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -270,7 +270,7 @@ export function CategoriesPage() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {filtered.map((c) => {
+              {filtered.map((c: Category) => {
                 const mappedProducts = productMap[c.id] ?? [];
                 const isExpanded = expandedId === c.id;
 
@@ -376,12 +376,12 @@ export function CategoriesPage() {
           <TextField
             label="Category Name"
             value={categoryName}
-            onChange={(e) => setCategoryName(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCategoryName(e.target.value)}
           />
           <TextField
             label="Description"
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDescription(e.target.value)}
             multiline
             minRows={3}
           />
@@ -408,7 +408,7 @@ export function CategoriesPage() {
             fullWidth
             placeholder="Search products…"
             value={mappingSearch}
-            onChange={(e) => setMappingSearch(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMappingSearch(e.target.value)}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -422,7 +422,7 @@ export function CategoriesPage() {
           <Divider />
 
           <List dense sx={{ maxHeight: 360, overflow: 'auto' }}>
-            {filteredMappingProducts.map((p) => {
+            {filteredMappingProducts.map((p: Product) => {
               const checked = mappingSelected.has(p.id);
               const otherCat = p.category && p.category.id !== mappingCategory?.id
                 ? p.category.categoryName
@@ -490,7 +490,7 @@ export function CategoriesPage() {
         confirmLabel="Delete"
       />
 
-      <Toast state={toast} onClose={() => setToast((t) => ({ ...t, open: false }))} />
+      <Toast state={toast} onClose={() => setToast((t: ToastState) => ({ ...t, open: false }))} />
     </Box>
   );
 }

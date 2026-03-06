@@ -1,6 +1,5 @@
 package com.StockManawgment.exception;
 
-import com.StockManawgment.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;

@@ -22,17 +22,12 @@ import type {
   User
 } from '../types/api';
 
-<<<<<<< Updated upstream
 // ─── Auth ─────────────────────────────────────────────────────────────────────
-=======
-// ─── Auth ───────────────────────────────────────
->>>>>>> Stashed changes
 export const AuthAPI = {
   login: async (payload: LoginRequest): Promise<LoginResponse> =>
     (await api.post<LoginResponse>('/api/auth/login', payload)).data
 };
 
-<<<<<<< Updated upstream
 // ─── Profile (self-service — any role) ───────────────────────────────────────
 export const ProfileAPI = {
   get: async (): Promise<User> =>
@@ -44,9 +39,6 @@ export const ProfileAPI = {
 };
 
 // ─── Users (ADMIN only) ───────────────────────────────────────────────────────
-=======
-// ─── Users ────────────────────────────────────────────────────────────────────
->>>>>>> Stashed changes
 export const UsersAPI = {
   list: async () => (await api.get<User[]>('/api/users')).data,
   get: async (id: number) => (await api.get<User>(`/api/users/${id}`)).data,
@@ -73,12 +65,8 @@ export const CategoriesAPI = {
     (await api.post<Category>('/api/categories', payload)).data,
   update: async (id: number, payload: Partial<Category>) =>
     (await api.put<Category>(`/api/categories/${id}`, payload)).data,
-<<<<<<< Updated upstream
   remove: async (id: number) =>
     (await api.delete<string>(`/api/categories/${id}`)).data
-=======
-  remove: async (id: number) => (await api.delete<string>(`/api/categories/${id}`)).data
->>>>>>> Stashed changes
 };
 
 // ─── Suppliers ────────────────────────────────────────────────────────────────
@@ -88,12 +76,8 @@ export const SuppliersAPI = {
     (await api.post<Supplier>('/api/suppliers', payload)).data,
   update: async (id: number, payload: Partial<Supplier>) =>
     (await api.put<Supplier>(`/api/suppliers/${id}`, payload)).data,
-<<<<<<< Updated upstream
   remove: async (id: number) =>
     (await api.delete<string>(`/api/suppliers/${id}`)).data
-=======
-  remove: async (id: number) => (await api.delete<string>(`/api/suppliers/${id}`)).data
->>>>>>> Stashed changes
 };
 
 // ─── Customers ────────────────────────────────────────────────────────────────
@@ -107,12 +91,8 @@ export const CustomersAPI = {
   remove: async (id: number) =>
     (await api.delete<string>(`/api/customers/${id}`)).data
 =======
-  remove: async (id: number) => (await api.delete<string>(`/api/customers/${id}`)).data
->>>>>>> Stashed changes
-};
-
-// ─── Products ─────────────────────────────────────────────────────────────────
-export const ProductsAPI = {
+  remove: async (id: number) =>
+    (await api.delete<string>(`/api/customers/${id}`)).dataI = {
   list: async () => (await api.get<Product[]>('/api/products')).data,
   get: async (id: number) => (await api.get<Product>(`/api/products/${id}`)).data,
   create: async (payload: Partial<Product>) =>
@@ -144,18 +124,12 @@ export const PurchasesAPI = {
     (await api.post<Purchase>('/api/purchases/create', payload)).data,
   update: async (id: number, payload: Partial<Purchase>) =>
     (await api.put<Purchase>(`/api/purchases/${id}`, payload)).data,
-<<<<<<< Updated upstream
   remove: async (id: number) =>
     (await api.delete<string>(`/api/purchases/${id}`)).data,
   approve: async (id: number) =>
     (await api.patch<Purchase>(`/api/purchases/${id}/approve`)).data,
   reject: async (id: number) =>
     (await api.patch<Purchase>(`/api/purchases/${id}/reject`)).data,
-=======
-  remove: async (id: number) => (await api.delete<string>(`/api/purchases/${id}`)).data,
-  approve: async (id: number) => (await api.patch<Purchase>(`/api/purchases/${id}/approve`)).data,
-  reject: async (id: number) => (await api.patch<Purchase>(`/api/purchases/${id}/reject`)).data,
->>>>>>> Stashed changes
   items: async (id: number) =>
     (await api.get<PurchaseItem[]>(`/api/purchases/${id}/items`)).data
 };
@@ -168,18 +142,12 @@ export const SalesAPI = {
     (await api.post<Sale>('/api/sales/create', payload)).data,
   update: async (id: number, payload: Partial<Sale>) =>
     (await api.put<Sale>(`/api/sales/${id}`, payload)).data,
-<<<<<<< Updated upstream
   remove: async (id: number) =>
     (await api.delete<string>(`/api/sales/${id}`)).data,
   items: async (id: number) =>
     (await api.get<SaleItem[]>(`/api/sales/${id}/items`)).data,
   invoice: async (id: number) =>
     (await api.get<Sale>(`/api/sales/${id}/invoice`)).data
-=======
-  remove: async (id: number) => (await api.delete<string>(`/api/sales/${id}`)).data,
-  items: async (id: number) => (await api.get<SaleItem[]>(`/api/sales/${id}/items`)).data,
-  invoice: async (id: number) => (await api.get<Sale>(`/api/sales/${id}/invoice`)).data
->>>>>>> Stashed changes
 };
 
 // ─── Stock ────────────────────────────────────────────────────────────────────

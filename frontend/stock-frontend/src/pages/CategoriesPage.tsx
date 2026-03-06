@@ -175,9 +175,9 @@ export function CategoriesPage() {
       const currentlyMapped = new Set((productMap[catId] ?? []).map((p: Product) => p.id));
 
       // Products to add to this category
-      const toAdd = [...mappingSelected].filter((pid) => !currentlyMapped.has(pid));
+      const toAdd: number[] = [...mappingSelected].filter((pid: number) => !currentlyMapped.has(pid));
       // Products to remove from this category
-      const toRemove = [...currentlyMapped].filter((pid) => !mappingSelected.has(pid));
+      const toRemove: number[] = [...currentlyMapped].filter((pid: number) => !mappingSelected.has(pid));
 
       const promises: Promise<any>[] = [];
 
@@ -330,7 +330,7 @@ export function CategoriesPage() {
                                   </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                  {mappedProducts.map((p) => (
+                                  {mappedProducts.map((p: Product) => (
                                     <TableRow key={p.id}>
                                       <TableCell>{p.name}</TableCell>
                                       <TableCell>{p.barcode ?? '-'}</TableCell>

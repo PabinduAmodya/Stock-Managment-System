@@ -1,7 +1,7 @@
 package com.StockManawgment.dto;
 
-import com.StockManawgment.Stock_Managment.entity.Purchase;
-import com.StockManawgment.Stock_Managment.entity.PurchaseItem;
+import com.StockManawgment.entity.Purchase;
+import com.StockManawgment.entity.PurchaseItem;
 import java.util.List;
 
 public class PurchaseRequest {

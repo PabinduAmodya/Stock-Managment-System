@@ -1,6 +1,6 @@
 package com.StockManawgment.dto;
 
-import com.StockManawgment.Stock_Managment.entity.User;
+import com.StockManawgment.entity.User;
 
 public class RoleChangeRequest {
     private User.Role role;

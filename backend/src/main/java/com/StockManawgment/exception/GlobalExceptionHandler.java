@@ -1,5 +1,6 @@
 package com.StockManawgment.exception;
 
+import com.StockManawgment.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -13,8 +14,8 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(com.StockManawgment.Stock_Managment.exception.ResourceNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleResourceNotFound(com.StockManawgment.Stock_Managment.exception.ResourceNotFoundException ex) {
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleResourceNotFound(ResourceNotFoundException ex) {
         Map<String, Object> error = new HashMap<>();
         error.put("timestamp", LocalDateTime.now());
         error.put("status", HttpStatus.NOT_FOUND.value());
@@ -23,8 +24,8 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
 
-    @ExceptionHandler(com.StockManawgment.Stock_Managment.exception.BadRequestException.class)
-    public ResponseEntity<Map<String, Object>> handleBadRequest(com.StockManawgment.Stock_Managment.exception.BadRequestException ex) {
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<Map<String, Object>> handleBadRequest(BadRequestException ex) {
         Map<String, Object> error = new HashMap<>();
         error.put("timestamp", LocalDateTime.now());
         error.put("status", HttpStatus.BAD_REQUEST.value());

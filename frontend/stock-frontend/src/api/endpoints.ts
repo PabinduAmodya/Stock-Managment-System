@@ -229,4 +229,3 @@ export const SalesAPI = {
   dailySalesCsv: async (dateISO: string) =>
     (await api.get('/api/reports/daily-sales/csv', { params: { date: dateISO }, responseType: 'blob' })).data
 };
->>>>>>> Stashed changes

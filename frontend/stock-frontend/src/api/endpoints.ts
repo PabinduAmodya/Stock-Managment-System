@@ -87,31 +87,24 @@ export const CustomersAPI = {
     (await api.post<Customer>('/api/customers', payload)).data,
   update: async (id: number, payload: Partial<Customer>) =>
     (await api.put<Customer>(`/api/customers/${id}`, payload)).data,
-<<<<<<< Updated upstream
   remove: async (id: number) =>
     (await api.delete<string>(`/api/customers/${id}`)).data
-=======
-  remove: async (id: number) =>
-    (await api.delete<string>(`/api/customers/${id}`)).dataI = {
+};
+
+// ─── Products ─────────────────────────────────────────────────────────────────
+export const ProductsAPI = {
   list: async () => (await api.get<Product[]>('/api/products')).data,
   get: async (id: number) => (await api.get<Product>(`/api/products/${id}`)).data,
   create: async (payload: Partial<Product>) =>
     (await api.post<Product>('/api/products', payload)).data,
   update: async (id: number, payload: Partial<Product>) =>
     (await api.put<Product>(`/api/products/${id}`, payload)).data,
-<<<<<<< Updated upstream
   remove: async (id: number) =>
     (await api.delete<string>(`/api/products/${id}`)).data,
   search: async (name: string) =>
     (await api.get<Product[]>('/api/products/search', { params: { name } })).data,
   lowStock: async () =>
     (await api.get<Product[]>('/api/products/low-stock')).data,
-=======
-  remove: async (id: number) => (await api.delete<string>(`/api/products/${id}`)).data,
-  search: async (name: string) =>
-    (await api.get<Product[]>('/api/products/search', { params: { name } })).data,
-  lowStock: async () => (await api.get<Product[]>('/api/products/low-stock')).data,
->>>>>>> Stashed changes
   byBarcode: async (barcode: string) =>
     (await api.get<Product>(`/api/products/barcode/${barcode}`)).data
 };

@@ -58,7 +58,7 @@ export function CategoryForm({ open, category, onClose, onSave }: CategoryFormPr
         <TextField
           label="Category Name"
           value={categoryName}
-          onChange={(e) => setCategoryName(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCategoryName(e.target.value)}
           required
           fullWidth
           autoFocus
@@ -67,7 +67,7 @@ export function CategoryForm({ open, category, onClose, onSave }: CategoryFormPr
         <TextField
           label="Description"
           value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDescription(e.target.value)}
           multiline
           minRows={3}
           fullWidth

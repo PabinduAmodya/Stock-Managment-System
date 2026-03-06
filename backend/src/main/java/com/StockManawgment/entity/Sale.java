@@ -1,14 +1,11 @@
 package com.StockManawgment.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.StockManawgment.entity.Product;
-import com.StockManawgment.entity.Customer;
-import com.StockManawgment.entity.SaleItem;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
-//
+
 @Entity
 @Table(name = "sales")
 public class Sale {
